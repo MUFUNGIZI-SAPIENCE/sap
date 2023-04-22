@@ -1,0 +1,33 @@
+$(document).ready(function(){
+    $("#noteDavance").hide();
+    $("#close").css('width','10%');
+    $("#close").css('color','red');
+    $("#close").click(function(e){
+        e.preventDefault();
+        $("#noteDavance").slideUp();
+        $("#div_num_note_avance").hide()
+    })
+$("#btn_avance_salaire").click(function(){
+    if($("#num_note").val()!=""){
+        $.ajax({
+            type:'get',
+            url:'./fonctions/recherche.php?NumnoteRechercher='+$("#num_note").val(),
+            success:function(server){
+                $("#noteDavance").css('position','fixed');
+                $("#noteDavance").css('top','45%');
+                $("#noteDavance").css('left','45%');
+                $("#noteDavance").css('right','70%');
+                $("#noteDavance").css('z-index',1060);
+                $("#noteDavance").css('background','rgb(35, 58, 185)');
+                $("#noteDavance").css('width','50%');
+                $("#noteDavance").css('border-color','black');
+                $("#noteDavance").css('opacity','95%');
+                $("#noteDavance").slideDown(500);
+               $("#note").html('');
+               $("#note").html(server);
+               $("#btn_enregis_paiement").show()
+            }
+        })
+    }
+})
+})
